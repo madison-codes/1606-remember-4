@@ -1,0 +1,7 @@
+<section class="reminder">
+  {{#each model as |reminder|}}
+    <article class="spec-reminder-item">{{reminder.title}}</article>
+  {{/each}}
+</section>
+
+{{outlet}}
