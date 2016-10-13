@@ -1,0 +1,14 @@
+.reminder-title {
+  font-size: 2em;
+  color: purple;
+  font-weight: bold;
+}
+
+.reminder-notes {
+  font-size: 15px;
+  color: pink;
+}
+
+.active {
+  color: black;
+}
