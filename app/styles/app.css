@@ -1,14 +1,26 @@
-.reminder-title {
-  font-size: 2em;
-  color: purple;
+.reminder-list {
+  border: 2px solid red;
+
+}
+.spec-reminder-item {
+  font-size: 2rem;
   font-weight: bold;
+  padding: 10px;
+  margin: 10px;
 }
 
 .reminder-notes {
-  font-size: 15px;
-  color: pink;
+  font-size: 1rem;
 }
+
 
 .active {
   color: black;
+  background-color: orange;
+}
+
+.clicked-reminder {
+  background-color: yellow;
+  padding: 10px;
+  font-size: 1rem;
 }
