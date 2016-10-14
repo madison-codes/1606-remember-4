@@ -1,7 +1,15 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  // model(params) {
-  //   this.get('store').find('new', params.new);
-  // }
-});
+    // title : '',
+    // notes : '',
+    // date : '',
+    actions: {
+      testAction: function() {
+        this.store.createRecord('reminder', {
+            title: this.title
+            // notes: this.notes
+          });
+      }
+    }
+  });
