@@ -1,30 +1,16 @@
-<form class="add-new-reminder" {{action  "testAction" on="submit"}}>
+<form class="add-new-reminder" {{action "addNewReminder" model on="submit"}}>
   <h1>Add new reminder</h1>
   <label>
     Title
-    {{input class="title-input" title=value}}
-  </label>
-  <input type="text" id="notes-input" placeholder="Notes">
-  <input type="date" id="date-input">
-  <button>Submit</button>
-</form>
-
-
-
-<!-- <h2>New Grocery</h2>
-
-<form class="add-grocery--form" {{action 'createGrocery' on="submit"}}>
-  <label>
-    Name
-    {{input class="spec-input-name" value=name}}
-  </label>
-  <label>
-    Quantity
-    {{input class="spec-input-quantity" value=quantity}}
+    {{input class="title-input" value=model.title}}
   </label>
   <label>
     Notes
-    {{textarea class="spec-textarea-notes" value=notes}}
+    {{input class="notes-input" value=model.notes}}
   </label>
-  <button class="add-grocery--submit">Submit</button>
-</form> -->
+  <label>
+    Date
+    {{input type="date" class="date-input" value=model.date}}
+  </label>
+  <button>Submit</button>
+</form>
