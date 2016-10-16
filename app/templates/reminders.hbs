@@ -1,7 +1,16 @@
-<section class="reminder">
+<section class="reminder-list">
   {{#each model as |reminder|}}
-    <article class="spec-reminder-item">{{reminder.title}}</article>
+  {{#link-to 'reminders.reminder' reminder tagName='article'}}
+      <article class="spec-reminder-item">
+        <h1 class="spec-reminder-title">{{reminder.title}}</h1>
+        <p class="reminder-notes">{{reminder.notes}}</p>
+        <p>{{reminder.id}}</p>
+      </article>
+      {{/link-to}}
   {{/each}}
+  {{#link-to 'reminders.new'}}
+    <button class="go-to-create-new">New</button>
+  {{/link-to}}
 </section>
 
 {{outlet}}

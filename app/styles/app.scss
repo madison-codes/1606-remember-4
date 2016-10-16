@@ -1,0 +1,31 @@
+.reminder-list {
+  border: 2px solid red;
+
+}
+.spec-reminder-item {
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  &:active {
+    color: black;
+    background-color: orange;
+  }
+}
+
+.reminder-notes {
+  font-size: 1rem;
+}
+
+.active {
+}
+
+.clicked-reminder {
+  background-color: yellow;
+  padding: 10px;
+  font-size: 1rem;
+}
+
+.add-new-reminder {
+  border: 2px solid green;
+}

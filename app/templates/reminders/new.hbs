@@ -1,0 +1,16 @@
+<form class="add-new-reminder" {{action 'addNewReminder' model on="submit" bubbles=false}}>
+  <h1>Add new reminder</h1>
+  <label>
+    Title
+    {{input class="title-input" value=model.title}}
+  </label>
+  <label>
+    Notes
+    {{input class="notes-input" value=model.notes}}
+  </label>
+  <label>
+    Date
+    {{input type="date" class="date-input" value=model.date}}
+  </label>
+  <button>Submit</button>
+</form>

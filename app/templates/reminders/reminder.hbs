@@ -1,0 +1,26 @@
+<article class="clicked-reminder" {{ action 'saveNew' reminder bubbles=false}}>
+  {{#if isEditing}}
+
+  <form class="edit-reminder" {{action 'saveEdited' model on="submit" bubbles=false}}>
+    <label>
+      Title
+      {{input class="edit-title-input" value=model.title}}
+    </label>
+    <label>
+      Notes
+      {{input class="edit-notes-input" value=model.notes}}
+    </label>
+    <button>Save</button>
+  </form>
+
+  {{else}}
+
+  <section>
+    <h1 class="reminder-title">{{model.title}}</h1>
+    <p class="reminder-notes">{{model.notes}}</p>
+    <p>{{model.id}}</p>
+    <button class="edit-reminder" {{ action 'editReminder' model bubbles=false}}>Editing?</button>
+  </section>
+
+  {{/if}}
+</article>

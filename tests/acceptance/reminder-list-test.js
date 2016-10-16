@@ -5,27 +5,34 @@ import moduleForAcceptance from 'remember/tests/helpers/module-for-acceptance';
 
 import Ember from 'ember';
 
-moduleForAcceptance('Acceptance | reminders list');
+moduleForAcceptance('Acceptance | reminders list', {
+  beforeEach() {
+    server.createList('reminder', 5);
+    visit('/');
+  },
+  afterEach() {
+    server.shutdown();
+  }
+});
 
 test('viewing the homepage', function(assert) {
-  server.createList('reminder', 5);
-
-  visit('/');
-
   andThen(function() {
     assert.equal(currentURL(), '/');
     assert.equal(Ember.$('.spec-reminder-item').length, 5);
   });
 });
 
-skip('clicking on an individual item', function(assert) {
-  server.createList('reminder', 5);
-
-  visit('/');
+test('clicking on an individual item', function(assert) {
   click('.spec-reminder-item:first');
-
   andThen(function() {
     assert.equal(currentURL(), '/1');
-    assert.equal(Ember.$('.spec-reminder-item:first').text().trim(), Ember.$('.spec-reminder-title').text().trim());
+    assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), Ember.$('.clicked-reminder .reminder-title').text().trim());
+  });
+});
+
+test('clicking new', function(assert) {
+  click('.go-to-create-new');
+  andThen(function() {
+    assert.equal(currentURL(), '/new');
   });
 });
