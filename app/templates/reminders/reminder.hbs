@@ -1,4 +1,4 @@
-<article class="clicked-reminder">
+<article {{ action 'saveNew' reminder bubbles=false}}>
   {{#if isEditing}}
 
   <form class="edit-reminder" {{action 'saveEdited' reminder on="submit" bubbles=false}}>
@@ -19,7 +19,7 @@
 
   {{else}}
 
-  <section>
+  <section class="clicked-reminder">
     <h1 class="reminder-title">{{model.title}}</h1>
     <p class="reminder-notes">{{model.notes}}</p>
     <p>{{model.id}}</p>
