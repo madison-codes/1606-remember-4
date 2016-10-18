@@ -1,6 +1,6 @@
 /* globals server */
 
-import { test, skip } from 'qunit';
+import { test } from 'qunit';
 import moduleForAcceptance from 'remember/tests/helpers/module-for-acceptance';
 
 import Ember from 'ember';
@@ -25,7 +25,6 @@ test('viewing the homepage', function(assert) {
 test('clicking on an individual item', function(assert) {
   click('.spec-reminder-item:first');
   andThen(function() {
-    // assert.equal(currentURL(), '/1');
     let expected = Ember.$('.spec-reminder-title:first').text().trim();
     let result = Ember.$('.active-reminder-title').text().trim();
     assert.equal(expected, result);
@@ -39,31 +38,66 @@ test('click new', function(assert) {
   });
 });
 
-skip('add input title to reminder', function(assert) {
+test('should add new reminder', function(assert){
+  visit('/new');
+  click('.add-new-reminder-button');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-item').length, 6);
+  });
+});
+
+test('title input matches new reminder title', function(assert) {
   visit ('/new');
   fillIn('.title-input', 'test');
-  click('.add-new-reminder');
+  click('.add-new-reminder-button');
   andThen(function() {
-    assert.equal(Ember.$('.spec-reminder-title').text().trim(),('test'));
+    assert.equal(Ember.$('.spec-reminder-title:last').text().trim(),('test'));
   });
 });
 
-skip('add input date to reminder', function(assert) {
+test('date input matches new reminder date', function(assert) {
   visit ('/new');
   fillIn('.date-input', '2016-10-16');
-  click('.add-new-reminder');
+  click('.add-new-reminder-button');
   andThen(function() {
-    assert.equal(Ember.$('.reminder-date').text().trim(),('2016-10-16'));
+    assert.equal(Ember.$('.reminder-date:last').text().trim(),('2016-10-16'));
   });
 });
 
 
-skip('routes to new item when clicked' , function(assert) {
-  assert.equal(currentURL(), '/6');
-  click('.add-new-reminder');
-  assert.equal(Ember.$('.spec-reminder-title:last').text().trim(), Ember.$('.clicked-reminder').text().trim());
+test('routes to specific reminder when clicked' , function(assert) {
+  click('.spec-reminder-item:first');
+  andThen(function() {
+    assert.equal(currentURL(), '/1');
+  });
 });
 
-// skip('allows you to edit item', function(assert) {
+test('reminder title can be edited and saved', function(assert) {
+  visit('/1');
+  click('.edit-reminder');
+  fillIn('.edit-title-input', 'Testing title edit functionality');
+  click('.edit-reminder-save--submit');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), ('Testing title edit functionality'));
+  });
+});
 
-// });
+test('reminder notes can be edited and saved', function(assert) {
+  visit('/5');
+  click('.edit-reminder');
+  fillIn('.edit-notes-input', 'Testing notes edit functionality');
+  click('.edit-reminder-save--submit');
+  andThen(function() {
+    assert.equal(Ember.$('.active-reminder-notes').text().trim(), ('Testing notes edit functionality'));
+  });
+});
+
+test('reminder dates can be edited and saved', function(assert) {
+  visit('/5');
+  click('.edit-reminder');
+  fillIn('.edit-date-input', '2016-10-18');
+  click('.edit-reminder-save--submit');
+  andThen(function() {
+    assert.equal(Ember.$('.reminder-date:last').text().trim(), ('2016-10-18'));
+  });
+});
