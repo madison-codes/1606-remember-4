@@ -26,6 +26,7 @@
     <p class="active-reminder-date">{{model.date}}</p>
     <p class="active-reminder-notes">{{model.notes}}</p>
     <button class="edit-reminder" {{ action 'editReminder'}}>Edit reminder.</button>
+    <button class="remove-reminder" {{action 'remove' model on="click"}}>Remove</button>
   </section>
 
   {{/if}}

@@ -32,9 +32,12 @@ export default Ember.Controller.extend({
       this.get('store').findRecord('reminder', model.id)
       .then(function(reminder) {
         if (reminder.currentState.isDirty) {
-          reminder.set('unsaved', true)
+          reminder.set('unsaved', true);
         }
-      })
+        else {
+          reminder.set('unsaved', false);
+        }
+      });
     }
   }
 });
