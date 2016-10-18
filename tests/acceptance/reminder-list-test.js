@@ -114,3 +114,13 @@ test('revert button undoes unsaved changes to fields', function(assert) {
     assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), ('Testing Revert Button'));
   });
 });
+
+test('reminders with unsaved changes have visual indicator', function(assert) {
+  visit('/1');
+  click('.edit-reminder');
+  fillIn('.edit-title-input', 'Testing');
+  click('.done-editing-button');
+  andThen(function() {
+    assert.ok('.unsaved');
+  })
+})
