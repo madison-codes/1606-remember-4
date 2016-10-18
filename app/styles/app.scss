@@ -1,26 +1,36 @@
-.reminder-list {
-  border: 2px solid red;
-
+.container {
+  display: flex;
 }
+.reminder-list {
+  width: 40%;
+  border: 2px solid red;
+}
+
+.reminder-date {
+  font-size: .5em;
+}
+
+.spec-reminder-title {
+  font-size: 1em;
+}
+
 .spec-reminder-item {
-  font-size: 2rem;
+  width: 100%;
   font-weight: bold;
   padding: 10px;
-  margin: 10px;
   &:active {
     color: black;
     background-color: orange;
   }
+  border: 1px solid black;
 }
 
 .reminder-notes {
   font-size: 1rem;
 }
 
-.active {
-}
-
 .clicked-reminder {
+  width: 60%;
   background-color: yellow;
   padding: 10px;
   font-size: 1rem;
