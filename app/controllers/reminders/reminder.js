@@ -7,13 +7,13 @@ export default Ember.Controller.extend({
     },
 
     saveEdited: function(model) {
-      let reminder = model.getProperties('title', 'notes', 'date'); 
+      let reminder = model.getProperties('title', 'notes', 'date');
       this.get('store').findRecord('reminder', model.id)
       .then(function(activeReminder) {
         activeReminder.setProperties({
           title: reminder.title,
           notes: reminder.notes,
-          date: reminder.date || new Date()
+          date: reminder.date || new Date().toDateString()
         });
         activeReminder.save();
       });
@@ -24,6 +24,19 @@ export default Ember.Controller.extend({
       this.get('store').findRecord('reminder', model.id)
       .then(function(activeReminder) {
         activeReminder.rollbackAttributes();
+      });
+      this.toggleProperty('isEditing');
+    },
+
+    checkForUnsavedChanges: function(model) {
+      this.get('store').findRecord('reminder', model.id)
+      .then(function(reminder) {
+        if (reminder.currentState.isDirty) {
+          reminder.set('unsaved', true);
+        }
+        else {
+          reminder.set('unsaved', false);
+        }
       });
     }
   }

@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
       this.store.createRecord('reminder', {
         title: model.title,
         notes: model.notes,
-        date: model.date || new Date()
+        date: model.date || new Date().toDateString()
       })
       .save()
       .then(function(){

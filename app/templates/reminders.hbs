@@ -5,7 +5,10 @@
       <article class="spec-reminder-item">
         <h1 class="spec-reminder-title">{{reminder.title}}</h1>
         <p class="reminder-date">{{reminder.date}}</p>
-      </article>
+        {{#if reminder.unsaved}}
+        <div class="unsaved">UNSAVED</div>
+        {{/if}}
+      </article>  
       {{/link-to}}
   {{/each}}
   {{#link-to 'reminders.new'}}

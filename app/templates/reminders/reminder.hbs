@@ -1,7 +1,7 @@
 <article class="clicked-reminder">
-  {{#if isEditing}}
+  {{#if this.isEditing}}
 
-  <form class="edit-reminder" {{action 'saveEdited' model on="submit"}}>
+  <form class="edit-reminder" {{action 'checkForUnsavedChanges' model on="change"}}>
     <label>
       Title
       {{input class="edit-title-input" value=model.title}}
@@ -14,8 +14,9 @@
       Date
       {{input type="date" class="edit-date-input" value=model.date}}
     </label>
-    <button class="edit-reminder-save--submit">Save</button>
-    <button class="revert-button" {{action 'undoChanges' model on="click"}}>Revert to original reminder.</button>
+    <button class="edit-reminder-save--submit" {{action 'saveEdited' model on="click"}}>Save</button>
+    <button class="revert-button" {{action 'undoChanges' model on="click"}}>Revert to saved reminder.</button>
+    <button class="done-editing-button" {{action 'editReminder' on="click"}}>Done editing.</button>
   </form>
 
   {{else}}
@@ -25,6 +26,7 @@
     <p class="active-reminder-date">{{model.date}}</p>
     <p class="active-reminder-notes">{{model.notes}}</p>
     <button class="edit-reminder" {{ action 'editReminder'}}>Edit reminder.</button>
+    <button class="remove-reminder" {{action 'remove' model on="click"}}>Remove</button>
   </section>
 
   {{/if}}
