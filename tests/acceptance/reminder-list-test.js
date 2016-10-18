@@ -122,5 +122,14 @@ test('reminders with unsaved changes have visual indicator', function(assert) {
   click('.done-editing-button');
   andThen(function() {
     assert.ok('.unsaved');
-  })
-})
+  });
+});
+
+
+test('remove reminder button deletes target reminder', function(assert) {
+  visit('/1');
+  click('.remove-reminder');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-item').length, 4);
+  });
+});
