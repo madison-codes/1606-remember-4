@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
   actions: {
     addNewReminder: function(model) {
-      debugger;
       this.store.createRecord('reminder', {
         title: model.title,
         notes: model.notes,
