@@ -15,6 +15,7 @@
       {{input type="date" class="edit-date-input" value=model.date}}
     </label>
     <button class="edit-reminder-save--submit">Save</button>
+    <button class="revert-button" {{action 'undoChanges' model on="click"}}>Revert to original reminder.</button>
   </form>
 
   {{else}}
