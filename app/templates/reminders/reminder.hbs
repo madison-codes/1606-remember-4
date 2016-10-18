@@ -1,7 +1,7 @@
-<article {{ action 'saveNew' reminder bubbles=false}}>
+<article class="clicked-reminder">
   {{#if isEditing}}
 
-  <form class="edit-reminder" {{action 'saveEdited' model on="submit" bubbles=false}}>
+  <form class="edit-reminder" {{action 'saveEdited' model on="submit"}}>
     <label>
       Title
       {{input class="edit-title-input" value=model.title}}
@@ -10,7 +10,11 @@
       Notes
       {{input class="edit-notes-input" value=model.notes}}
     </label>
-    <button class="edit-reminder-save">Save</button>
+    <label>
+      Date
+      {{input type="date" class="edit-date-input" value=model.date}}
+    </label>
+    <button class="edit-reminder-save--submit">Save</button>
   </form>
 
   {{else}}
@@ -19,7 +23,7 @@
     <h1 class="reminder-title">{{model.title}}</h1>
     <p class="reminder-notes">{{model.notes}}</p>
     <p>{{model.id}}</p>
-    <button class="edit-reminder" {{ action 'editReminder' model bubbles=false}}>Editing?</button>
+    <button class="edit-reminder" {{ action 'editReminder'}}>Edit reminder.</button>
   </section>
 
   {{/if}}

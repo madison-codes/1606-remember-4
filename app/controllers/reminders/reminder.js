@@ -7,18 +7,17 @@ export default Ember.Controller.extend({
     },
 
     saveEdited: function(model) {
-      let modelDate;
-      if(model.date) { modelDate = new Date(model.date); }
-      else { modelDate = new Date(); }
-      this.store.createRecord('reminder', {
-        title: model.title,
-        notes: model.notes,
-        date: modelDate
-      })
-      .save()
-      .then(function(){
-        model.setProperties({ title: '', date: '', notes: '' });
-     });
+      let reminder = model.getProperties('title', 'notes', 'date')
+      this.get('store').findRecord('reminder', model.id)
+      .then(function(activeReminder) {
+        activeReminder.setProperties({
+          title: reminder.title,
+          notes: reminder.notes,
+          date: reminder.date || new Date()
+        });
+        activeReminder.save();
+      });
+      this.toggleProperty('isEditing');
     }
   }
 });
