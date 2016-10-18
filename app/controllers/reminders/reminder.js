@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     },
 
     saveEdited: function(model) {
-      let reminder = model.getProperties('title', 'notes', 'date'); 
+      let reminder = model.getProperties('title', 'notes', 'date');
       this.get('store').findRecord('reminder', model.id)
       .then(function(activeReminder) {
         activeReminder.setProperties({
