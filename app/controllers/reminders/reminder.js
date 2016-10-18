@@ -18,6 +18,13 @@ export default Ember.Controller.extend({
         activeReminder.save();
       });
       this.toggleProperty('isEditing');
+    },
+
+    undoChanges: function(model) {
+      this.get('store').findRecord('reminder', model.id)
+      .then(function(activeReminder) {
+        activeReminder.rollbackAttributes();
+      });
     }
   }
 });
