@@ -101,3 +101,16 @@ test('reminder dates can be edited and saved', function(assert) {
     assert.equal(Ember.$('.reminder-date:last').text().trim(), ('2016-10-18'));
   });
 });
+
+test('revert button undoes unsaved changes to fields', function(assert) {
+  visit('/1');
+  click('.edit-reminder');
+  fillIn('.edit-title-input', 'Testing Revert Button');
+  click('.edit-reminder-save--submit');
+  click('.edit-reminder');
+  fillIn('.edit-title-input', 'this wont show up');
+  click('.revert-button');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), ('Testing Revert Button'));
+  });
+});
