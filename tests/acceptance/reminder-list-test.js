@@ -27,7 +27,7 @@ test('clicking on an individual item', function(assert) {
   andThen(function() {
     // assert.equal(currentURL(), '/1');
     let expected = Ember.$('.spec-reminder-title:first').text().trim();
-    let result = Ember.$('.reminder-title').text().trim();
+    let result = Ember.$('.active-reminder-title').text().trim();
     assert.equal(expected, result);
   });
 });
@@ -39,23 +39,28 @@ test('click new', function(assert) {
   });
 });
 
-test('Add New', function(assert) {
-  click('.go-to-create-new');
-  andThen(function() {
-    assert.equal(currentURL(), '/new');
-  });
-
-  fillIn('.title-input', 'Reminder Title');
-  fillIn('.notes-input', 'Reminder Notes');
+skip('add input title to reminder', function(assert) {
+  visit ('/new');
+  fillIn('.title-input', 'test');
   click('.add-new-reminder');
-
   andThen(function() {
-    assert.equal(Ember.$('.spec-reminder-item').length, 6);
+    assert.equal(Ember.$('.spec-reminder-title').text().trim(),('test'));
   });
 });
 
+skip('add input date to reminder', function(assert) {
+  visit ('/new');
+  fillIn('.date-input', '2016-10-16');
+  click('.add-new-reminder');
+  andThen(function() {
+    assert.equal(Ember.$('.reminder-date').text().trim(),('2016-10-16'));
+  });
+});
+
+
 skip('routes to new item when clicked' , function(assert) {
   assert.equal(currentURL(), '/6');
+  click('.add-new-reminder');
   assert.equal(Ember.$('.spec-reminder-title:last').text().trim(), Ember.$('.clicked-reminder').text().trim());
 });
 
