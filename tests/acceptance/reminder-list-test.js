@@ -25,14 +25,40 @@ test('viewing the homepage', function(assert) {
 test('clicking on an individual item', function(assert) {
   click('.spec-reminder-item:first');
   andThen(function() {
-    assert.equal(currentURL(), '/1');
-    assert.equal(Ember.$('.spec-reminder-title:first').text().trim(), Ember.$('.clicked-reminder .reminder-title').text().trim());
+    // assert.equal(currentURL(), '/1');
+    let expected = Ember.$('.spec-reminder-title:first').text().trim();
+    let result = Ember.$('.reminder-title').text().trim();
+    assert.equal(expected, result);
   });
 });
 
-test('clicking new', function(assert) {
+test('click new', function(assert) {
   click('.go-to-create-new');
   andThen(function() {
     assert.equal(currentURL(), '/new');
   });
 });
+
+test('Add New', function(assert) {
+  click('.go-to-create-new');
+  andThen(function() {
+    assert.equal(currentURL(), '/new');
+  });
+
+  fillIn('.title-input', 'Reminder Title');
+  fillIn('.notes-input', 'Reminder Notes');
+  click('.add-new-reminder');
+
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-item').length, 6);
+  });
+});
+
+skip('routes to new item when clicked' , function(assert) {
+  assert.equal(currentURL(), '/6');
+  assert.equal(Ember.$('.spec-reminder-title:last').text().trim(), Ember.$('.clicked-reminder').text().trim());
+});
+
+// skip('allows you to edit item', function(assert) {
+
+// });
