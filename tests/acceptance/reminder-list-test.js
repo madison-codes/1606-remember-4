@@ -125,10 +125,17 @@ test('reminders with unsaved changes have visual indicator', function(assert) {
   });
 });
 
-
 test('remove reminder button deletes target reminder', function(assert) {
   visit('/1');
   click('.remove-reminder');
+  andThen(function() {
+    assert.equal(Ember.$('.spec-reminder-item').length, 4);
+  });
+});
+
+test('remove reminder onclick of remove button in reminder list', function(assert) {
+  visit('/1');
+  click('.remove-reminder-from-list');
   andThen(function() {
     assert.equal(Ember.$('.spec-reminder-item').length, 4);
   });
