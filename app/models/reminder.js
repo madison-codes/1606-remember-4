@@ -5,4 +5,5 @@ export default DS.Model.extend({
   date: DS.attr('string'),
   notes: DS.attr('string'),
   pinned: DS.attr('boolean', { defaultValue: false}),
+  active: DS.attr('boolean', { defaultValue: true})
 });
